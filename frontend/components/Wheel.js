@@ -1,6 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux';
+import { moveClockwise, moveCounterClockwise } from '../state/action-creators';
 
-export default function Wheel(props) {
+
+function Wheel(props) {
+
+  const number = [0, 1, 2, 3, 4, 5]
+
+  const { initialNumber, className, moveClockwise, moveCounterClockwise } = props;
+  //console.log(props);
+
+  useEffect(() => {
+    props.moveClockwise(3, "butthole");
+  })
+
+  console.log(props.initialNumber);
+  console.log(props.className)
+
+
+
   return (
     <div id="wrapper">
       <div id="wheel">
@@ -18,3 +36,15 @@ export default function Wheel(props) {
     </div>
   )
 }
+
+const mapStateToProps = (state) => {
+  //console.log(state.wheel.initialNumber);
+
+  return({
+    initialNumber: state.wheel.initialNumber,
+    className: state.wheel.className,
+
+  })
+}
+
+export default connect(mapStateToProps, {moveClockwise, moveCounterClockwise})(Wheel);

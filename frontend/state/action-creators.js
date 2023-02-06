@@ -1,24 +1,55 @@
 // ❗ You don't need to add extra action creators to achieve MVP
-export function moveClockwise() { }
+import { 
+  MOVE_CLOCKWISE, 
+  MOVE_COUNTERCLOCKWISE, 
+  SET_QUIZ_INTO_STATE,
+  SET_SELECTED_ANSWER,
+  SET_INFO_MESSAGE,
+  INPUT_CHANGE,
+  RESET_FORM  
+} from "./action-types";
 
-export function moveCounterClockwise() { }
 
-export function selectAnswer() { }
+export function moveClockwise(InitialNumber, ClassName) { 
 
-export function setMessage() { }
+  //console.log(InitialNumber, ClassName);
+  return({
+    type: MOVE_CLOCKWISE, 
+    payload: {
+      initialNumber: InitialNumber, 
+      className: ClassName
+    }
+  })
+}
 
-export function setQuiz() { }
+export function moveCounterClockwise(initialNumber, className) {
+  return({type: MOVE_COUNTERCLOCKWISE, payload: initialNumber})
+ }
 
-export function inputChange() { }
+export function selectAnswer() { 
+  return({type: SELECT_ANSWER})
+}
 
-export function resetForm() { }
+export function setMessage() { 
+  return({type: SET_MESSAGE})
+}
+
+export function setQuiz() { 
+  return({type: SET_QUIZ})
+}
+
+export function inputChange() { 
+  return({type: INPUT_CHANGE})
+}
+
+export function resetForm() { 
+  return({type: RESET_FORM})
+}
 
 // ❗ Async action creators
 export function fetchQuiz() {
   return function (dispatch) {
-    // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
-    // On successful GET:
-    // - Dispatch an action to send the obtained quiz to its state
+
   }
 }
 export function postAnswer() {
