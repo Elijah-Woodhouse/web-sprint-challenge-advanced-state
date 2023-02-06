@@ -31,8 +31,41 @@ function Wheel(props) {
 
   //InitialNumber, ClassName, ClickLeft, ClickRight
 
-  const handleCounterWise = (event) => {
- 
+  for(let i = 0; i < number.length; i++){
+    if (props.initialNumber === i) {
+
+    }
+  }
+
+  const handleCounterWise = event => {
+    event.preventDefault();
+
+    moveClockwise(props.initialNumber, props.className, true, false);
+    if (props.initialNumber === 5){
+          moveClockwise(4, props.className, false, false)
+          set5active(false);
+          set4active(true);
+    } else if(props.initialNumber === 4){
+          moveClockwise(3, props.className, false, false)
+          set4active(false);
+          set3active(true);
+    } else if(props.initialNumber === 3){
+          moveClockwise(2, props.className, false, false)
+          set3active(false);
+          set2active(true);
+    } else if(props.initialNumber === 2){
+          moveClockwise(1, props.className, false, false)
+          set2active(false);
+          set1active(true);
+    } else if(props.initialNumber === 1){
+          moveClockwise(0, props.className, false, false)
+          set1active(false);
+          set0active(true);
+    } else if(props.initialNumber === 0){
+          moveClockwise(5, props.className, false, false)
+          set0active(false);
+          set5active(true);
+    } 
   }
 
   const handleClickWise = event => {
