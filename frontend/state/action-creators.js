@@ -10,14 +10,16 @@ import {
 } from "./action-types";
 
 
-export function moveClockwise(InitialNumber, ClassName) { 
+export function moveClockwise(InitialNumber, ClassName, ClickLeft, ClickRight) { 
 
   //console.log(InitialNumber, ClassName);
   return({
     type: MOVE_CLOCKWISE, 
     payload: {
       initialNumber: InitialNumber, 
-      className: ClassName
+      className: ClassName,
+      clickLeft: ClickLeft,
+      clickRight: ClickRight
     }
   })
 }

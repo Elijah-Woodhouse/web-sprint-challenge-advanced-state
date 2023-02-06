@@ -12,7 +12,9 @@ import {
 
 const initialWheelState = {
   initialNumber: 0,
-  className: ""
+  className: "",
+  clickRight: false,
+  clickLeft: false
 }
 
 function wheel(state = initialWheelState, action) {
@@ -22,7 +24,9 @@ function wheel(state = initialWheelState, action) {
       return {
         ...state,
         initialNumber: action.payload.initialNumber, 
-        className: action.payload.className
+        className: action.payload.className,
+        clickRight: action.payload.clickRight,
+        clickLeft: action.payload.clickLeft
       }
     case MOVE_COUNTERCLOCKWISE:
       return{

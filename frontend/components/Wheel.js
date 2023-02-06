@@ -3,19 +3,39 @@ import { connect } from 'react-redux';
 import { moveClockwise, moveCounterClockwise } from '../state/action-creators';
 
 
+
+
 function Wheel(props) {
 
-  const number = [0, 1, 2, 3, 4, 5]
+  const number = [0, 1, 2, 3, 4, 5];
 
-  const { initialNumber, className, moveClockwise, moveCounterClockwise } = props;
-  //console.log(props);
+  const { 
+    clickLeft, 
+    clickRight, 
+    initialNumber, 
+    className, 
+    moveClockwise, 
+    moveCounterClockwise } = props;
 
+  //console.log(props.clickLeft);
+console.log(props);
   useEffect(() => {
-    props.moveClockwise(3, "butthole");
+    props.moveClockwise(props.initialNumber, props.className, props.clickLeft, true);
   })
 
-  console.log(props.initialNumber);
-  console.log(props.className)
+  console.log(props);
+  //InitialNumber, ClassName, ClickLeft, ClickRight
+
+  const handleClickRight = () => {
+    moveClockwise(props.initialNumber, props.className, props.clickLeft, true);
+    if (props.initialNumber === 5 && props.clickRight === true){
+          moveClockwise(0, props.className, props.clickLeft, false)
+    }
+  }
+
+  const handleClickLeft = e => {
+
+  }
 
 
 
@@ -43,7 +63,8 @@ const mapStateToProps = (state) => {
   return({
     initialNumber: state.wheel.initialNumber,
     className: state.wheel.className,
-
+    clickRight: state.wheel.clickRight,
+    clickLeft: state.wheel.clickLeft
   })
 }
 
