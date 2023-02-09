@@ -4,7 +4,7 @@ import {
   MOVE_CLOCKWISE, 
   MOVE_COUNTERCLOCKWISE, 
   FETCH_QUIZ,
-  SET_SELECTED_ANSWER,
+  POST_ANSWER,
   SET_INFO_MESSAGE,
   INPUT_CHANGE,
   RESET_FORM  
@@ -104,6 +104,16 @@ const initialFormState = {
   newFalseAnswer: '',
 }
 function form(state = initialFormState, action) {
+  console.log(action.payload)
+  switch(action.type){
+    case "POST_ANSWER":
+      return{
+        ...state,
+        newQuestoin: action.payload.NewQuestion,
+        newTrueAnswer: action.payload.NewTrueAnswer,
+        newFalseAnswer: action.payload.newFalseAnswer
+      }
+  }
   return state
 }
 

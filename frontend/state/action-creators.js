@@ -3,7 +3,7 @@ import {
   MOVE_CLOCKWISE, 
   MOVE_COUNTERCLOCKWISE, 
   FETCH_QUIZ,
-  SET_SELECTED_ANSWER,
+  POST_ANSWER,
   SET_INTO_MESSAGE,
   INPUT_CHANGE,
   RESET_FORM,
@@ -11,7 +11,6 @@ import {
   POST_QUIZ
 } from "./action-types";
 import axios from 'axios';
-import Quiz from "../components/Quiz";
 
 
 export function moveClockwise(InitialNumber, ClassName, ClickLeft, ClickRight) { 
@@ -81,12 +80,18 @@ export function fetchQuiz() {
   }
 }
 
-export function postAnswer() {
+export function postAnswer(NewQuestion, NewTrueAnswer, NewFalseAnswer) {
+  const params = {
+    "new_question" : NewQuestion,
+    "new_true_answer" : NewTrueAnswer,
+    "new_false_answer" : NewFalseAnswer
+  }
   return function (dispatch) {
-    // On successful POST:
-    // - Dispatch an action to reset the selected answer state
-    // - Dispatch an action to set the server message to state
-    // - Dispatch the fetching of the next quiz
+    dispatch({type: POST_ANSWER});
+    axios.post("http://localhost:9000/api/quiz/new", params)
+      .then(res => {
+        console.log(res);
+      })
   }
 }
 
