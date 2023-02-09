@@ -23,9 +23,9 @@ function Wheel(props) {
     moveClockwise, 
     moveCounterClockwise } = props;
 
-// useEffect(e => {
-//       e.preventDefault();
-// }, [])
+  useEffect(() => {
+      moveClockwise(props.initialNumber, props.className, props.clickLeft, props.clickRight)
+  })
 
   const handleCounterWise = event => {
     event.preventDefault();
@@ -102,12 +102,12 @@ function Wheel(props) {
   return (
     <div id="wrapper">
       <div id="wheel">
-        {active0 ? <div className="cog active" style={{ "--i": 0 }}>B</div> : <div className="cog" style={{ "--i": 0 }}></div>}
-        {active1 ? <div className="cog active" style={{ "--i": 1 }}>B</div> : <div className="cog" style={{ "--i": 1 }}></div>}
-        {active2 ? <div className="cog active" style={{ "--i": 2 }}>B</div> : <div className="cog" style={{ "--i": 2 }}></div>}
-        {active3 ? <div className="cog active" style={{ "--i": 3 }}>B</div> : <div className="cog" style={{ "--i": 3 }}></div>}
-        {active4 ? <div className="cog active" style={{ "--i": 4 }}>B</div> : <div className="cog" style={{ "--i": 4 }}></div>}
-        {active5 ? <div className="cog active" style={{ "--i": 5 }}>B</div> : <div className="cog" style={{ "--i": 5 }}></div>}
+        {initialNumber === 0 ? <div className="cog active" style={{ "--i": 0 }}>B</div> : <div className="cog" style={{ "--i": 0 }}></div>}
+        {initialNumber === 1 ? <div className="cog active" style={{ "--i": 1 }}>B</div> : <div className="cog" style={{ "--i": 1 }}></div>}
+        {initialNumber === 2 ? <div className="cog active" style={{ "--i": 2 }}>B</div> : <div className="cog" style={{ "--i": 2 }}></div>}
+        {initialNumber === 3 ? <div className="cog active" style={{ "--i": 3 }}>B</div> : <div className="cog" style={{ "--i": 3 }}></div>}
+        {initialNumber === 4 ? <div className="cog active" style={{ "--i": 4 }}>B</div> : <div className="cog" style={{ "--i": 4 }}></div>}
+        {initialNumber === 5 ? <div className="cog active" style={{ "--i": 5 }}>B</div> : <div className="cog" style={{ "--i": 5 }}></div>}
         {/* --i5is a custom CSS property, no need to touch that nor the style object */}
       </div>
       <div id="keypad">
@@ -120,6 +120,8 @@ function Wheel(props) {
 
 const mapStateToProps = (state) => {
   //console.log(state.wheel.initialNumber);
+
+      console.log(state);
 
   return({
     initialNumber: state.wheel.initialNumber,

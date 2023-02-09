@@ -15,7 +15,9 @@ function Quiz(props) {
   }, [])
 
 
-  console.log(props.answer1Id, "answer id");
+  //console.log(props.answer1Id, "answer id");
+
+  //console.log(props);
 
 
   const toggleSelected = (e) => {

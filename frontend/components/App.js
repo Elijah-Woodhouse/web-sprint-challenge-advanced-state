@@ -1,7 +1,7 @@
 // 👉 DO NOT CHANGE THIS FILE 👈
 // 👉 DO NOT CHANGE THIS FILE 👈
 // 👉 DO NOT CHANGE THIS FILE 👈
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter, NavLink, Routes, Route } from 'react-router-dom'
 import Wheel from './Wheel'
 import Quiz from './Quiz'
@@ -22,6 +22,8 @@ export const resetStore = () => {
 }
 
 resetStore()
+
+
 export default function App() {
 
   return (

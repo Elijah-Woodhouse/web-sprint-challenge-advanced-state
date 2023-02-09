@@ -1,5 +1,5 @@
 // ❗ You don't need to add extra reducers to achieve MVP
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 import { 
   MOVE_CLOCKWISE, 
   MOVE_COUNTERCLOCKWISE, 
@@ -16,6 +16,8 @@ const initialWheelState = {
   clickRight: false,
   clickLeft: false
 }
+
+
 
 function wheel(state = initialWheelState, action) {
   //console.log(state);
