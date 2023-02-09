@@ -3,7 +3,7 @@ import { combineReducers } from 'redux'
 import { 
   MOVE_CLOCKWISE, 
   MOVE_COUNTERCLOCKWISE, 
-  SET_QUIZ_INTO_STATE,
+  FETCH_QUIZ,
   SET_SELECTED_ANSWER,
   SET_INFO_MESSAGE,
   INPUT_CHANGE,
@@ -18,6 +18,7 @@ const initialWheelState = {
 }
 
 function wheel(state = initialWheelState, action) {
+  //console.log(state);
   switch(action.type) {
     case MOVE_CLOCKWISE:
       //console.log(action.payload.initialNumber)
@@ -28,25 +29,38 @@ function wheel(state = initialWheelState, action) {
         clickRight: action.payload.clickRight,
         clickLeft: action.payload.clickLeft
       }
-    case MOVE_COUNTERCLOCKWISE:
-      return{
-        ...state,
-        initialNumber: action.payload.initialNumber,
-        className: action.payload.className
-      }
     default:
       return(state);
   }
 }
 
-const initialQuizState = null
+
+
+const initialQuizState = {
+    question: "",
+    id: 0,
+    answer1: "",
+    answer2: '',
+    answer1Id: "",
+    answer2Id: ""
+}
 function quiz(state = initialQuizState, action) {
+  //console.log(state);
   switch(action.type){
-    case "SET_QUIZ_INTO_STATE":
+    case "FETCH_QUIZ":
       return {
         ...state,
-        initialQuizState: action.payload
       }
+      case "SET_QUIZ":
+        return{
+          ...state,
+        question: action.payload.Question,
+        id: action.payload.Id,
+        answer1: action.payload.Answer1,
+        answer2: action.payload.Answer2,
+        answer1Id: action.payload.Answer1Id,
+        answer2Id: action.payload.Answer2Id,
+        }
     default:
     return (state)
   }

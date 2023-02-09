@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
-import { moveClockwise, moveCounterClockwise } from '../state/action-creators';
+import { moveClockwise } from '../state/action-creators';
 
 
 
@@ -23,19 +23,9 @@ function Wheel(props) {
     moveClockwise, 
     moveCounterClockwise } = props;
 
-
-  //console.log(props.clickLeft);
-  useEffect(() => {
-    console.log(active0, active1, active2, active3, active4, active5, props.initialNumber);
-  })
-
-  //InitialNumber, ClassName, ClickLeft, ClickRight
-
-  for(let i = 0; i < number.length; i++){
-    if (props.initialNumber === i) {
-
-    }
-  }
+// useEffect(e => {
+//       e.preventDefault();
+// }, [])
 
   const handleCounterWise = event => {
     event.preventDefault();
@@ -105,12 +95,6 @@ function Wheel(props) {
   //   <div className="cog" style={{ "--i": i }}></div>
   // }
 
-  const items = number.map((num, index) => {
-    return(
-      <div className="" style={{ "--i": index }}></div>
-    )
-  })
-
   //items[0].props.className
 
 
@@ -145,4 +129,4 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps, {moveClockwise, moveCounterClockwise})(Wheel);
+export default connect(mapStateToProps, {moveClockwise})(Wheel);
