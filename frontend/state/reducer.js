@@ -104,14 +104,18 @@ const initialFormState = {
   newFalseAnswer: '',
 }
 function form(state = initialFormState, action) {
-  console.log(action)
+  console.log(action.payload)
   switch(action.type){
-    case "POST_ANSWER":
+    case "SET_ANSWER":
       return{
         ...state,
         newQuestion: action.payload.NewQuestion,
         newTrueAnswer: action.payload.NewTrueAnswer,
         newFalseAnswer: action.payload.newFalseAnswer
+      }
+    case "POST_ANSWER":
+      return{
+        ...state
       }
   }
   return state

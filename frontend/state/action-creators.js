@@ -86,11 +86,16 @@ export function fetchQuiz() {
 
 export function postAnswer(NewQuestion, NewTrueAnswer, NewFalseAnswer) {
   const params = {
-    "new_question" : NewQuestion,
-    "new_true_answer" : NewTrueAnswer,
-    "new_false_answer" : NewFalseAnswer
+    "question_text" : NewQuestion,
+    "true_answer_text" : NewTrueAnswer,
+    "false_answer_text" : NewFalseAnswer
   }
   return function (dispatch) {
+    dispatch({type: SET_ANSWER, payload: {
+      newQuestion: NewQuestion,
+      newTrueAnswer: NewTrueAnswer,
+      newFalseAnswer: NewFalseAnswer
+    }});
     dispatch({type: POST_ANSWER});
     axios.post("http://localhost:9000/api/quiz/new", params)
       .then(res => {
