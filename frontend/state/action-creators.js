@@ -91,12 +91,12 @@ export function postAnswer(NewQuestion, NewTrueAnswer, NewFalseAnswer) {
     "false_answer_text" : NewFalseAnswer
   }
   return function (dispatch) {
-    dispatch({type: SET_ANSWER, payload: {
+    
+    dispatch({type: POST_ANSWER, payload: {
       newQuestion: NewQuestion,
       newTrueAnswer: NewTrueAnswer,
       newFalseAnswer: NewFalseAnswer
     }});
-    dispatch({type: POST_ANSWER});
     axios.post("http://localhost:9000/api/quiz/new", params)
       .then(res => {
         console.log(res);

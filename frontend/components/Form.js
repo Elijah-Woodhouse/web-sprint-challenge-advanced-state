@@ -4,10 +4,8 @@ import {postAnswer} from '../state/action-creators'
 
 export function Form(props) {
 
-  const { newQuestion, newTrueAnswer, newFalseAnswer } = props;
-  console.log(props.newQuestion)
+  const { newQuestion, newTrueAnswer, newFalseAnswer, postAnswer } = props;
 
-  //console.log(props.form.newFalseAnswer)
 
   const [stuff, setStuff] = useState({
     New_Question: "",
@@ -16,7 +14,6 @@ export function Form(props) {
   });
 
   const onChange = evt => {
-    console.log(stuff.New_Question)
     evt.preventDefault();
     setStuff({
       ...stuff,
@@ -26,7 +23,7 @@ export function Form(props) {
 
   const onSubmit = evt => {
     evt.preventDefault();
-    postAnswer(stuff.New_Question, stuff.New_True_Answer, stuff.New_False_Answer)
+    props.postAnswer(stuff.New_Question, stuff.New_True_Answer, stuff.New_False_Answer)
     setStuff({
       New_Question: "",
       New_True_Answer: "",
