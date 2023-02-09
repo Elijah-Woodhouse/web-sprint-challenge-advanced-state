@@ -4,6 +4,7 @@ import {
   MOVE_COUNTERCLOCKWISE, 
   FETCH_QUIZ,
   POST_ANSWER,
+  SET_ANSWER,
   SET_INTO_MESSAGE,
   INPUT_CHANGE,
   RESET_FORM,
@@ -31,8 +32,8 @@ export function moveCounterClockwise(initialNumber) {
   return({type: MOVE_COUNTERCLOCKWISE, payload: initialNumber})
  }
 
-export function selectAnswer() { 
-  return({type: SELECT_ANSWER})
+export function setAnswer() { 
+  return({type: SET_ANSWER})
 }
 
 export function setMessage(Message) { 
@@ -79,6 +80,9 @@ export function fetchQuiz() {
       })
   }
 }
+
+
+//write a new function that sets the new sets up answers and the question to redux state
 
 export function postAnswer(NewQuestion, NewTrueAnswer, NewFalseAnswer) {
   const params = {

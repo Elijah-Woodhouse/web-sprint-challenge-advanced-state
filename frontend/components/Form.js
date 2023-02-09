@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import * as actionCreators from '../state/action-creators'
+import {postAnswer} from '../state/action-creators'
 
 export function Form(props) {
 
   const { newQuestion, newTrueAnswer, newFalseAnswer } = props;
+  console.log(props.newQuestion)
 
   //console.log(props.form.newFalseAnswer)
 
@@ -15,6 +16,7 @@ export function Form(props) {
   });
 
   const onChange = evt => {
+    console.log(stuff.New_Question)
     evt.preventDefault();
     setStuff({
       ...stuff,
@@ -24,8 +26,12 @@ export function Form(props) {
 
   const onSubmit = evt => {
     evt.preventDefault();
-    actionCreators.postAnswer(stuff.New_Question, stuff.New_True_Answer, stuff.New_False_Answer)
-    console.log(stuff.new_Question)
+    postAnswer(stuff.New_Question, stuff.New_True_Answer, stuff.New_False_Answer)
+    setStuff({
+      New_Question: "",
+      New_True_Answer: "",
+      New_False_Answer: ""
+    });
   }
 
   return (
@@ -40,7 +46,7 @@ export function Form(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.form)
+  //console.log(state.form)
 
   return({
     newQuestion: state.form.newQuestion,
@@ -49,4 +55,4 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(st => st, actionCreators)(Form)
+export default connect(mapStateToProps, {postAnswer})(Form);
