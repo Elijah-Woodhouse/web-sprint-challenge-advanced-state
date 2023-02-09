@@ -8,3 +8,4 @@ export const INPUT_CHANGE = 'INPUT_CHANGE'
 export const RESET_FORM = 'RESET_FORM'
 export const SET_QUIZ = "SET_QUIZ";
 export const POST_QUIZ = "POST_QUIZ";
+export const SET_INTO_MESSAGE = "SET_INTO_MESSAGE";

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { fetchQuiz, postQuiz } from '../state/action-creators';
+import { fetchQuiz, postQuiz, setMessage } from '../state/action-creators';
 
 
 function Quiz(props) {
   const [ selected1, setSelected1 ] = useState(false)
   const [ selected2, setSelected2 ] = useState(false)
-  const { answer1, answer2, answer1Id, answer2Id, question, id, fetchQuiz, postQuiz} = props;
+  const [ disabled, setDisabled ] = useState(true);
+  const { message, answer1, answer2, answer1Id, answer2Id, question, id, fetchQuiz, postQuiz, setMessage} = props;
 
   useEffect(() => {
     //console.log(props.id)
@@ -28,8 +29,10 @@ function Quiz(props) {
     if(selected2 === true){
       setSelected2(false);
       setSelected1(true);
+      setDisabled(false);
     } else if(selected1 ===false && selected2 === false){
       setSelected1(true);
+      setDisabled(false);
     }
   }
 
@@ -37,14 +40,23 @@ function Quiz(props) {
     if(selected1 === true){
       setSelected1(false);
       setSelected2(true);
+      setDisabled(false);
     } else if(selected1 ===false && selected2 === false){
       setSelected2(true);
+      setDisabled(false);
     }
+  }
+
+  const handleChange = (e) => {
+    e.preventDefault();
   }
 
   const onSubmit = (e) => {
     //console.log(props.id, props.answer1Id);
     selected1 ? postQuiz(props.id, props.answer1Id) : postQuiz(props.id, props.answer2Id);
+    //setMessage(props.message)
+    //console.log(props.message);
+    fetchQuiz();
   }
 
 
@@ -88,7 +100,7 @@ function Quiz(props) {
             </div>
             </div>}
 
-            <button id="submitAnswerBtn" onClick={onSubmit}>Submit answer</button>
+            <button id="submitAnswerBtn" disabled={disabled} onClick={onSubmit}>Submit answer</button>
           </>
         ) : 'Loading next quiz...'
       }
@@ -97,7 +109,6 @@ function Quiz(props) {
 }
 
 const mapStateToProps = (state) => {
-  //console.log(state.wheel.initialNumber);
 
   return({
     answer1: state.quiz.answer1,
@@ -106,7 +117,8 @@ const mapStateToProps = (state) => {
     answer2Id: state.quiz.answer2Id,
     question: state.quiz.question,
     id: state.quiz.id,
+    message: state.infoMessage.message
   })
 }
 
-export default connect(mapStateToProps, {fetchQuiz, postQuiz})(Quiz);
+export default connect(mapStateToProps, {fetchQuiz, postQuiz, setMessage})(Quiz);

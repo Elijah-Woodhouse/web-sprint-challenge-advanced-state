@@ -44,7 +44,8 @@ const initialQuizState = {
     answer1: "",
     answer2: '',
     answer1Id: "",
-    answer2Id: ""
+    answer2Id: "",
+    true_false_message: ""
 }
 function quiz(state = initialQuizState, action) {
   //console.log(state);
@@ -82,13 +83,15 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
   return state
 }
 
-const initialMessageState = ''
+const initialMessageState = {
+  message: "Nice Job!"
+}
 function infoMessage(state = initialMessageState, action) {
   switch(action.type){
     case "SET_INTO_MESSAGE":
       return{
         ...state,
-        initialMessageState: action.payload
+        message: action.payload
       }
       default:
         return(state);

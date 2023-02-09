@@ -4,7 +4,7 @@ import {
   MOVE_COUNTERCLOCKWISE, 
   FETCH_QUIZ,
   SET_SELECTED_ANSWER,
-  SET_INFO_MESSAGE,
+  SET_INTO_MESSAGE,
   INPUT_CHANGE,
   RESET_FORM,
   SET_QUIZ,
@@ -28,7 +28,7 @@ export function moveClockwise(InitialNumber, ClassName, ClickLeft, ClickRight) {
   })
 }
 
-export function moveCounterClockwise(initialNumber, className) {
+export function moveCounterClockwise(initialNumber) {
   return({type: MOVE_COUNTERCLOCKWISE, payload: initialNumber})
  }
 
@@ -36,8 +36,8 @@ export function selectAnswer() {
   return({type: SELECT_ANSWER})
 }
 
-export function setMessage() { 
-  return({type: SET_MESSAGE})
+export function setMessage(Message) { 
+  return({type: SET_INTO_MESSAGE, payload: { initialMessageState: Message}})
 }
 
 export function inputChange() { 
@@ -48,14 +48,14 @@ export function resetForm() {
   return({type: RESET_FORM})
 }
 
-export function setQuiz(Answer1, Answer2, Answer1Id, Answer2Id, Id, Question) { 
+export function setQuiz(Answer1, Answer2, Answer1Id, Answer2Id, Id, Question ) { 
   return({type: SET_QUIZ, payload: {
     answer1: Answer1,
     answer2: Answer2,
     answer1Id: Answer1Id,
     answer2Id: Answer2Id,
     id: Id, 
-    question: Question
+    question: Question,
   }
 })
 }
@@ -100,8 +100,8 @@ export function postQuiz(QuizId, AnswerId) {
     //console.log(QuizId, AnswerId)
     axios.post("http://localhost:9000/api/quiz/answer", params)
       .then(res => {
-        console.log(res)
-        
+        //console.log(res.data.message);
+        dispatch({type: SET_INTO_MESSAGE, payload: res.data.message})
       })
   }
 }
