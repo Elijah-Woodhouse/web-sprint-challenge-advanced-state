@@ -25,14 +25,21 @@ function Quiz(props) {
   }
 
   const handleSelect1 = (e) => {
-    setSelected1(!selected1);
-    selected2 ? setSelected2(!selected1) : setSelected2(selected1);
-
+    if(selected2 === true){
+      setSelected2(false);
+      setSelected1(true);
+    } else if(selected1 ===false && selected2 === false){
+      setSelected1(true);
+    }
   }
 
   const handleSelect2 = (e) => {
-    setSelected2(!selected2);
-    selected1 && selected2 ? setSelected1(!selected1) : setSelected1(selected1);
+    if(selected1 === true){
+      setSelected1(false);
+      setSelected2(true);
+    } else if(selected1 ===false && selected2 === false){
+      setSelected2(true);
+    }
   }
 
   const onSubmit = (e) => {
@@ -50,36 +57,20 @@ function Quiz(props) {
             <h2>{props.question}</h2>
 
             <div id="quizAnswers">
-              {selected1 ? 
-
-              <div className="answer selected">
-                {props.answer1}
-                <button onClick={handleSelect1}>
-                  { selected1 ? <div>SELECTED</div> : <div>Select</div>}
-                </button>
-              </div> :
-
               <div className="answer">
                 {props.answer1}
                 <button onClick={handleSelect1}>
-                  { selected1 ? <div>SELECTED</div> : <div>Select</div>}
+                  { selected1 ? <div>SELECTED</div> : <div>select</div>}
                 </button>
-              </div>}
-
-              {selected2 ? 
-              <div className="answer selected">
-                {props.answer2}
-                <button onClick={handleSelect2}>
-                  { selected2 ? <div>SELECTED</div> : <div>Select</div>}
-                </button>
-              </div> : 
+              </div>
 
               <div className="answer">
               {props.answer2}
               <button onClick={handleSelect2}>
-                { selected2 ? <div>SELECTED</div> : <div>Select</div>}
+                { selected2 ? <div>SELECTED</div> : <div>select</div>}
               </button>
-            </div>}
+            </div>
+
             </div>
 
             <button id="submitAnswerBtn" onClick={onSubmit}>Submit answer</button>

@@ -119,9 +119,6 @@ function Wheel(props) {
 }
 
 const mapStateToProps = (state) => {
-  //console.log(state.wheel.initialNumber);
-
-      console.log(state);
 
   return({
     initialNumber: state.wheel.initialNumber,
