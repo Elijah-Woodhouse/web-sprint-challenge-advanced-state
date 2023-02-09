@@ -56,8 +56,9 @@ function Quiz(props) {
           <>
             <h2>{props.question}</h2>
 
+            {selected1 ?  
             <div id="quizAnswers">
-              <div className="answer">
+              <div className="answer selected">
                 {props.answer1}
                 <button onClick={handleSelect1}>
                   { selected1 ? <div>SELECTED</div> : <div>select</div>}
@@ -70,8 +71,22 @@ function Quiz(props) {
                 { selected2 ? <div>SELECTED</div> : <div>select</div>}
               </button>
             </div>
+            </div> :  
+            <div id="quizAnswers">
+              <div className="answer">
+                {props.answer1}
+                <button onClick={handleSelect1}>
+                  { selected1 ? <div>SELECTED</div> : <div>select</div>}
+                </button>
+              </div>
 
+              <div className="answer selected">
+              {props.answer2}
+              <button onClick={handleSelect2}>
+                { selected2 ? <div>SELECTED</div> : <div>select</div>}
+              </button>
             </div>
+            </div>}
 
             <button id="submitAnswerBtn" onClick={onSubmit}>Submit answer</button>
           </>
