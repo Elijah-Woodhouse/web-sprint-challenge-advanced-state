@@ -6,27 +6,28 @@ import {postAnswer, questionChange, newFalseChange, newTrueChange} from '../stat
 export function Form(props) {
 
   const { newQuestion, newTrueAnswer, newFalseAnswer, postAnswer, questionChange, newTrueChange, newFalseChange} = props;
-  const [disable, setDisabled] = useState(false);
-  const [stuff, setStuff] = useState({
-    New_Question: "",
-    New_True_Answer: "",
-    New_False_Answer: ""
-  });
+  const [disable, setDisabled] = useState(true);
 
 
   //checks if all inputs have at least 2 characters and changes 
   //the state of the submit button from disabled to enabled
+  useEffect(() => {
+    let question = newQuestion.trim();
+    let truth = newTrueAnswer.trim();
+    let falsey = newFalseAnswer.trim();
+    if(question.length < 2 || truth.length < 2 || falsey.length < 2){
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+    console.log(newQuestion);
+  })
 
 
   const onSubmit = evt => {
     evt.preventDefault();
     console.log(props.newQuestion);
-    props.postAnswer(props.newQuestion, props.newTrueAnswer, props.newFalseAnswer)
-    setStuff({
-      New_Question: "",
-      New_True_Answer: "",
-      New_False_Answer: ""
-    });
+    props.postAnswer(props.newQuestion, props.newTrueAnswer, props.newFalseAnswer) 
   }
 
   return (

@@ -2,12 +2,18 @@
 import { combineReducers } from 'redux';
 import { 
   MOVE_CLOCKWISE, 
-  MOVE_COUNTERCLOCKWISE, 
   FETCH_QUIZ,
   POST_ANSWER,
-  SET_INFO_MESSAGE,
+  SET_INTO_MESSAGE,
   INPUT_CHANGE,
-  RESET_FORM  
+  RESET_FORM,
+  QUESTION_CHANGE,
+  NEW_TRUE_CHANGE,
+  NEW_FALSE_CHANGE,
+  SET_ANSWER,
+  SET_SELECTED_ANSWER,
+  SET_QUIZ,
+
 } from "./action-types";
 
 const initialWheelState = {
