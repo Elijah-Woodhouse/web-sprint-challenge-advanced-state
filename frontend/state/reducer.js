@@ -135,9 +135,9 @@ function form(state = initialFormState, action) {
       case "RESET_FORM":
         return({
           ...state,
-          newQuestion: action.payload.questionTextBox,
-          newTrueAnswer: action.payload.trueTextBox,
-          newFalseAnswer: action.payload.falseTextBox
+          newQuestion: '',
+          newTrueAnswer: '',
+          newFalseAnswer: ''
         })
       case "POST_ANSWER":
         return{

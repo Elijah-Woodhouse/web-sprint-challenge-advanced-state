@@ -38,7 +38,7 @@ export function Form(props) {
     evt.preventDefault();
     //console.log(props.newQuestion);
     props.postAnswer(props.newQuestion, props.newTrueAnswer, props.newFalseAnswer);
-    props.resetForm(" ", " ", " ")
+    props.resetForm("", "", "")
     console.log(props.newQuestion);
   }
 
