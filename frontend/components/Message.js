@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 function Message(props) {
 
    useEffect(() => {
+    console.log(props.message);
     setMessage(message)
    });
   

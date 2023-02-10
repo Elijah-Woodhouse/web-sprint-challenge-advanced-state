@@ -12,6 +12,7 @@ import {
   POST_QUIZ
 } from "./action-types";
 import axios from 'axios';
+import { Action } from "history";
 
 
 export function moveClockwise(InitialNumber, ClassName, ClickLeft, ClickRight) { 
@@ -40,8 +41,12 @@ export function setMessage(Message) {
   return({type: SET_INTO_MESSAGE, payload: { initialMessageState: Message}})
 }
 
-export function inputChange() { 
-  return({type: INPUT_CHANGE})
+export const inputChange = (event, questionChange, TrueChange, FalseChange) => { 
+  return({type: INPUT_CHANGE, payload: {
+    newQuestion: event.target.value,
+    newTrueQuestion: TrueChange,
+    newFalseQuestion: FalseChange
+  }})
 }
 
 export function resetForm() { 

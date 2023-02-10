@@ -1,17 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import {postAnswer} from '../state/action-creators'
+import {postAnswer, inputChange} from '../state/action-creators'
+
 
 export function Form(props) {
 
-  const { newQuestion, newTrueAnswer, newFalseAnswer, postAnswer } = props;
+  const { newQuestion, newTrueAnswer, newFalseAnswer, postAnswer, inputChange } = props;
 
-
+  const [disable, setDisabled] = useState(true);
   const [stuff, setStuff] = useState({
     New_Question: "",
     New_True_Answer: "",
     New_False_Answer: ""
   });
+
+  useEffect(() => {
+    if(stuff.New_Question.length > 1 && stuff.New_True_Answer.length > 1 && stuff.New_False_Answer.length > 1){
+      setDisabled(false);
+    }
+  },[stuff])
+
+
 
   const onChange = evt => {
     evt.preventDefault();
@@ -32,13 +41,15 @@ export function Form(props) {
   }
 
   return (
-    <form id="form">
-      <h2>Create New Quiz</h2>
-      <input type="text" maxLength={50} name="New_Question" value={stuff.New_Question} onChange={onChange} id="newQuestion" placeholder="Enter question" />
-      <input type="text" maxLength={50} name="New_True_Answer" value={stuff.New_True_Answer} onChange={onChange} id="newTrueAnswer" placeholder="Enter true answer" />
-      <input type="text" maxLength={50} name="New_False_Answer" value={stuff.New_False_Answer} onChange={onChange} id="newFalseAnswer" placeholder="Enter false answer" />
-      <button id="submitNewQuizBtn" onClick={onSubmit}>Submit new quiz</button>
-    </form>
+    <div>
+      <form id="form">
+        <h2>Create New Quiz</h2>
+        <input type="text" maxLength={50} name="New_Question" value={stuff.New_Question} onChange={onChange} id="newQuestion" placeholder="Enter question" />
+        <input type="text" maxLength={50} name="New_True_Answer" value={stuff.New_True_Answer} onChange={onChange} id="newTrueAnswer" placeholder="Enter true answer" />
+        <input type="text" maxLength={50} name="New_False_Answer" value={stuff.New_False_Answer} onChange={onChange} id="newFalseAnswer" placeholder="Enter false answer" />
+        <button id="submitNewQuizBtn" disabled={disable} onClick={onSubmit}>Submit new quiz</button>
+      </form>
+    </div>
   )
 }
 
@@ -52,4 +63,4 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps, {postAnswer})(Form);
+export default connect(mapStateToProps, {postAnswer, inputChange})(Form);
