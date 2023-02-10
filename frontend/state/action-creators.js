@@ -6,7 +6,9 @@ import {
   POST_ANSWER,
   SET_ANSWER,
   SET_INTO_MESSAGE,
-  INPUT_CHANGE,
+  QUESTION_CHANGE,
+  NEW_TRUE_CHANGE,
+  NEW_FALSE_CHANGE,
   RESET_FORM,
   SET_QUIZ,
   POST_QUIZ
@@ -41,16 +43,14 @@ export function setMessage(Message) {
   return({type: SET_INTO_MESSAGE, payload: { initialMessageState: Message}})
 }
 
-export const inputChange = (questionText, trueText, falseText) => { 
-  return{type: INPUT_CHANGE, payload: {
-    newQuestion: questionText,
-    newTrueAnswer: trueText,
-    newFalseAnswer: falseText,
-  }}
-}
-
-export function resetForm() { 
-  return({type: RESET_FORM})
+export const questionChange = (newText) => {
+  return{type: QUESTION_CHANGE, payload: newText.target.value}
+ }
+ export const newTrueChange = (newText) => {
+  return{type: NEW_TRUE_CHANGE, payload: newText.target.value}
+ }
+ export const newFalseChange = (newText) => {
+  return{type: NEW_FALSE_CHANGE, payload: newText.target.value}
 }
 
 export function setQuiz(Answer1, Answer2, Answer1Id, Answer2Id, Id, Question ) { 
