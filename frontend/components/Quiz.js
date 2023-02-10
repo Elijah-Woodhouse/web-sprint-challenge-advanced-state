@@ -57,6 +57,8 @@ function Quiz(props) {
     //setMessage(props.message)
     //console.log(props.message);
     fetchQuiz();
+    setSelected1(false);
+    setSelected2(false);
   }
 
 

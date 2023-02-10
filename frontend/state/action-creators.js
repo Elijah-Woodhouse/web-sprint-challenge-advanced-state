@@ -41,12 +41,12 @@ export function setMessage(Message) {
   return({type: SET_INTO_MESSAGE, payload: { initialMessageState: Message}})
 }
 
-export const inputChange = (event, questionChange, TrueChange, FalseChange) => { 
-  return({type: INPUT_CHANGE, payload: {
-    newQuestion: questionChange.target.value,
-    newTrueQuestion: TrueChange.target.value,
-    newFalseQuestion: FalseChange.target.value
-  }})
+export const inputChange = (questionText, trueText, falseText) => { 
+  return{type: INPUT_CHANGE, payload: {
+    newQuestion: questionText,
+    newTrueAnswer: trueText,
+    newFalseAnswer: falseText,
+  }}
 }
 
 export function resetForm() { 

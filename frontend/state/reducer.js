@@ -113,12 +113,12 @@ function form(state = initialFormState, action) {
         newFalseAnswer: action.payload.NewFalseAnswer
       }
     case "INPUT_CHANGE":
-      return{
+      return({
         ...state,
-        newQuestion: action.payload.NewQuestion,
-        newTrueAnswer: action.payload.NewTrueAnswer,
-        newFalseAnswer: action.payload.NewFalseAnswer
-      }
+        newQuestion: action.payload.questionText,
+        newTrueAnswer: action.payload.trueText,
+        newFalseAnswer: action.payload.falseText
+      })
     case "POST_ANSWER":
       return{
         ...state
