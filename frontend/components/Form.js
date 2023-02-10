@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import {postAnswer, inputChange} from '../state/action-creators'
+import {postAnswer, inputChange, setMessage} from '../state/action-creators'
 
 
 export function Form(props) {
 
-  const { newQuestion, newTrueAnswer, newFalseAnswer, postAnswer, inputChange } = props;
+  const { newQuestion, newTrueAnswer, newFalseAnswer, postAnswer, inputChange, setMessage, message } = props;
 
   const [disable, setDisabled] = useState(true);
   const [stuff, setStuff] = useState({
@@ -14,16 +14,26 @@ export function Form(props) {
     New_False_Answer: ""
   });
 
-  useEffect(() => {
-    if(stuff.New_Question.length > 1 && stuff.New_True_Answer.length > 1 && stuff.New_False_Answer.length > 1){
+
+ useEffect(() => {
+    let falsey = stuff.New_False_Answer.trim();
+    let truthy = stuff.New_True_Answer.trim();
+    let Q = stuff.New_Question.trim();
+    console.log(falsey, truthy, Q);
+    if(Q.length > 1 && truthy.length > 1 && falsey.length > 1){
       setDisabled(false);
-    }
-  },[stuff])
+  } else if(Q.length < 1 || truthy.length < 1 || falsey.length < 1){
+      setDisabled(true);
+  }
+ })
+
+ 
 
 
 
   const onChange = evt => {
     evt.preventDefault();
+    console.log("butts");
     setStuff({
       ...stuff,
       [evt.target.name]: evt.target.value
@@ -59,8 +69,9 @@ const mapStateToProps = (state) => {
   return({
     newQuestion: state.form.newQuestion,
     newTrueAnswer: state.form.newTrueAnswer,
-    newFalseAnswer: state.form.newFalseAnswer
+    newFalseAnswer: state.form.newFalseAnswer,
+    message: state.infoMessage.message
   })
 }
 
-export default connect(mapStateToProps, {postAnswer, inputChange})(Form);
+export default connect(mapStateToProps, {setMessage, postAnswer, inputChange})(Form);

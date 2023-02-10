@@ -7,7 +7,7 @@ function Quiz(props) {
   const [ selected1, setSelected1 ] = useState(false)
   const [ selected2, setSelected2 ] = useState(false)
   const [ disabled, setDisabled ] = useState(true);
-  const { message, answer1, answer2, answer1Id, answer2Id, question, id, fetchQuiz, postQuiz, setMessage} = props;
+  const { message, answer1, answer2, answer1Id, answer2Id, question, id, fetchQuiz, postQuiz} = props;
 
   useEffect(() => {
     //console.log(props.id)
@@ -117,8 +117,7 @@ const mapStateToProps = (state) => {
     answer2Id: state.quiz.answer2Id,
     question: state.quiz.question,
     id: state.quiz.id,
-    message: state.infoMessage.message
   })
 }
 
-export default connect(mapStateToProps, {fetchQuiz, postQuiz, setMessage})(Quiz);
+export default connect(mapStateToProps, {fetchQuiz, postQuiz})(Quiz);

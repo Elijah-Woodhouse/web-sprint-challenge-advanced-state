@@ -43,9 +43,9 @@ export function setMessage(Message) {
 
 export const inputChange = (event, questionChange, TrueChange, FalseChange) => { 
   return({type: INPUT_CHANGE, payload: {
-    newQuestion: event.target.value,
-    newTrueQuestion: TrueChange,
-    newFalseQuestion: FalseChange
+    newQuestion: questionChange.target.value,
+    newTrueQuestion: TrueChange.target.value,
+    newFalseQuestion: FalseChange.target.value
   }})
 }
 
@@ -102,6 +102,7 @@ export function postAnswer(NewQuestion, NewTrueAnswer, NewFalseAnswer) {
       newTrueAnswer: NewTrueAnswer,
       newFalseAnswer: NewFalseAnswer
     }});
+    dispatch({type: SET_INTO_MESSAGE, payload: "Congrats: " + `"${NewQuestion}"` + " is a great question!"})
     axios.post("http://localhost:9000/api/quiz/new", params)
       .then(res => {
         console.log(res);
