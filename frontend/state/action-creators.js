@@ -122,6 +122,7 @@ export function postQuiz(QuizId, AnswerId) {
   return function (dispatch) {
     dispatch({type: POST_QUIZ});
     //console.log(QuizId, AnswerId)
+    dispatch({type: SET_INTO_MESSAGE, payload: "That was the correct answer"})
     axios.post("http://localhost:9000/api/quiz/answer", params)
       .then(res => {
         //console.log(res.data.message);

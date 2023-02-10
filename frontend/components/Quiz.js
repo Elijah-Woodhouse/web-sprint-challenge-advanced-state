@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import { fetchQuiz, postQuiz, setMessage } from '../state/action-creators';
+import { fetchQuiz, postQuiz } from '../state/action-creators';
 
 
 function Quiz(props) {
@@ -8,12 +8,20 @@ function Quiz(props) {
   const [ selected2, setSelected2 ] = useState(false)
   const [ disabled, setDisabled ] = useState(true);
   const { message, answer1, answer2, answer1Id, answer2Id, question, id, fetchQuiz, postQuiz} = props;
+  const mountedRef = useRef();
+  const [value, setValue] = useState(false);
 
-  useEffect(() => {
-    //console.log(props.id)
+
+
+ useEffect(() => {
+  fetchQuiz();
+  if(mountedRef.current){
+    setValue(true);
+  }
+  if(value){
     fetchQuiz();
-    //console.log(props.id)
-  }, [])
+  }
+ },[value])
 
 
   //console.log(props.answer1Id, "answer id");
@@ -21,11 +29,8 @@ function Quiz(props) {
   //console.log(props);
 
 
-  const toggleSelected = (e) => {
-    e.preventDefault();
-  }
-
   const handleSelect1 = (e) => {
+    e.preventDefault();
     if(selected2 === true){
       setSelected2(false);
       setSelected1(true);
@@ -37,6 +42,7 @@ function Quiz(props) {
   }
 
   const handleSelect2 = (e) => {
+    e.preventDefault();
     if(selected1 === true){
       setSelected1(false);
       setSelected2(true);
@@ -47,15 +53,14 @@ function Quiz(props) {
     }
   }
 
-  const handleChange = (e) => {
-    e.preventDefault();
-  }
+
 
   const onSubmit = (e) => {
     //console.log(props.id, props.answer1Id);
+
     selected1 ? postQuiz(props.id, props.answer1Id) : postQuiz(props.id, props.answer2Id);
+    console.log(props.message)
     //setMessage(props.message)
-    //console.log(props.message);
     fetchQuiz();
     setSelected1(false);
     setSelected2(false);
@@ -111,6 +116,7 @@ function Quiz(props) {
 }
 
 const mapStateToProps = (state) => {
+  //console.log(state);
 
   return({
     answer1: state.quiz.answer1,
@@ -119,6 +125,7 @@ const mapStateToProps = (state) => {
     answer2Id: state.quiz.answer2Id,
     question: state.quiz.question,
     id: state.quiz.id,
+    message: state.infoMessage.message
   })
 }
 
