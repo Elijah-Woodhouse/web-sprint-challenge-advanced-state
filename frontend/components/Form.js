@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import {postAnswer, questionChange, newFalseChange, newTrueChange} from '../state/action-creators'
+import { postAnswer, questionChange, newFalseChange, newTrueChange, resetForm } from '../state/action-creators'
 
 
 export function Form(props) {
@@ -9,25 +9,37 @@ export function Form(props) {
   const [disable, setDisabled] = useState(true);
 
 
+
   //checks if all inputs have at least 2 characters and changes 
   //the state of the submit button from disabled to enabled
+
+
+
   useEffect(() => {
-    let question = newQuestion.trim();
-    let truth = newTrueAnswer.trim();
-    let falsey = newFalseAnswer.trim();
-    if(question.length < 2 || truth.length < 2 || falsey.length < 2){
-      setDisabled(true);
-    } else {
-      setDisabled(false);
+    let q = props.newQuestion;
+    let t = props.newTrueAnswer;
+    let f = props.newFalseAnswer;
+    if(f === undefined || t === undefined || f === undefined){
+      q = "";
+      t = "";
+      f = "";
     }
-    console.log(newQuestion);
-  })
+      if(q.length > 1 || t.length > 1 || f.length > 1){
+        if(props.newQuestion.trim().length < 2 || props.newTrueAnswer.trim().length < 2 || props.newFalseAnswer.trim().length < 2){
+          setDisabled(true);
+        } else if (props.newQuestion.trim().length >= 2 || props.newTrueAnswer.trim().length >= 2 || props.newFalseAnswer.trim().length >= 2){
+          setDisabled(false);
+        }
+      }
+  }, [props.newQuestion, props.newTrueAnswer, props.newFalseAnswer])
 
 
   const onSubmit = evt => {
     evt.preventDefault();
+    //console.log(props.newQuestion);
+    props.postAnswer(props.newQuestion, props.newTrueAnswer, props.newFalseAnswer);
+    props.resetForm(" ", " ", " ")
     console.log(props.newQuestion);
-    props.postAnswer(props.newQuestion, props.newTrueAnswer, props.newFalseAnswer) 
   }
 
   return (
@@ -53,4 +65,4 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps, {postAnswer, questionChange, newTrueChange, newFalseChange})(Form)
+export default connect(mapStateToProps, {postAnswer, questionChange, newTrueChange, newFalseChange, resetForm})(Form)

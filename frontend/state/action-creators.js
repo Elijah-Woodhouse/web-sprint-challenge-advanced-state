@@ -11,7 +11,7 @@ import {
   NEW_FALSE_CHANGE,
   RESET_FORM,
   SET_QUIZ,
-  POST_QUIZ
+  POST_QUIZ,
 } from "./action-types";
 import axios from 'axios';
 import { Action } from "history";
@@ -31,13 +31,17 @@ export function moveClockwise(InitialNumber, ClassName, ClickLeft, ClickRight) {
   })
 }
 
+export function resetForm( questionTextBox, trueTextBox, falseTextBox){
+  return({type: RESET_FORM, payload: {
+    newQuestion: questionTextBox,
+    newTrueAnswer: trueTextBox,
+    newFalseAnswer: falseTextBox,
+  }})
+}
+
 export function moveCounterClockwise(initialNumber) {
   return({type: MOVE_COUNTERCLOCKWISE, payload: initialNumber})
  }
-
-export function setAnswer() { 
-  return({type: SET_ANSWER})
-}
 
 export function setMessage(Message) { 
   return({type: SET_INTO_MESSAGE, payload: { initialMessageState: Message}})
